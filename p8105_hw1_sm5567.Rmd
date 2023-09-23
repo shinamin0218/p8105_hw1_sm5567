@@ -1,21 +1,93 @@
 ---
 title: "P8105_HW_sm5567"
-output: github_document
+author: Shina Min
+date: September 2023
+output:
+  github_document:
+    toc: true
 ---
 
-I'm an R Markdown document! 
 
 # Section 1
 
-Here's a **code chunk** that samples from 
-a _normal distribution_:
+* The variables in this dataset: 15 variables including origin, year, month, day, hour, temp, dewp, humid, wind_dir, wind_speed, wind_qust, precip, pressure, visib, and time_hour. 
+
+* This dataset has 358 entries. 
+
+* The dataset has `r nrow ("early_january_weather")` 15 rows and
+`r ncol("early_january_weather")` 358 columns.
+
+* The mean of temperature is 39.58212
+
 
 ```{r}
-samp = rnorm(100)
-length(samp)
+
+library(ggplot2)
+library(moderndive)
+library(tidyverse)
+data("early_january_weather")
+
+n_rows <- nrow(early_january_weather)
+n_cols <- ncol(early_january_weather)
+
+mean_temp <- mean(early_january_weather$temp) 
+mean(pull(early_january_weather,'temp'))
+     
+ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
+  geom_point() + labs(x = "Time Hour", y = "Temperature", color = "Humidity")
+
+ggsave("Shinaplot.pdf",plot = last_plot())
+
 ```
+
+
 
 # Section 2
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+* Data frame comprised of: 
+
+```{r s2_df_create}
+samp = rnorm(10)
+length(samp)
+
+s2_df = tibble(
+  samp = rnorm(10, sd = 1),
+  vec_logical = samp > 0,
+  vec_char = c("a", "b", "c", "d", "e", "f", "g", "h", "i","j"),
+  vec_factor = factor(c("red", "green", "blue","red", "green", "blue", "red","green","blue", "red"))
+)
+```
+
+
+
+```{r s2_df_mean}
+
+library(tidyverse)
+mean_samp = pull(s2_df, samp)
+mean_vec_logical = pull(s2_df, vec_logical)
+mean_vec_char = pull(s2_df, vec_char)
+mean_vec_factor = pull(s2_df, vec_factor)
+
+```
+
+* Calculating the mean of the numeric vector (mean_numeric) works fine because it contains numeric values.
+* Calculating the mean of the logical vector (mean_logical) also works, as R can treat TRUE as 1 and FALSE as 0, so it calculates the mean correctly.
+* However, attempting to calculate the mean of the character vector (mean_character) and the factor vector (mean_factor) results in an error because you cannot calculate the mean of non-numeric or factor variables directly.
+
+
+```{r s2_df_apply}
+
+as.numeric(pull(s2_df, samp))
+as.numeric(pull(s2_df, vec_logical))
+as.numeric(pull(s2_df, vec_char))
+as.numeric(pull(s2_df, vec_factor))
+
+```
+
+* "NAs introduced by coercion" happened because R is trying to convert non-numeric values (characters) to a numeric data type using the as.numeric function.
+* Other codes worked because they have numeric values. 
+
+
+
+
+
