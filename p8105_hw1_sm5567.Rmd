@@ -17,7 +17,7 @@ output:
 * The dataset has `r nrow ("early_january_weather")` 15 rows and
 `r ncol("early_january_weather")` 358 columns.
 
-* The mean of temperature is 39.58212
+* The mean of temperature is 39.58212 F.
 
 
 ```{r}
@@ -39,6 +39,9 @@ ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
 ggsave("Shinaplot.pdf",plot = last_plot())
 
 ```
+
+* Image of a scatterplot of temp (y) vs time_hour (x); color points using the humid variable. This scatterplot is created with points colored according to the humid variable. The points are colored using a continuous scale, with the lower values of humid in dark blue and the higher values in skyblue. This makes it easy to see the relationship between the temp and humid variables.
+* In this particular case, we can see that the temp tends to increase as the humid increases.
 
 
 # Section 2
@@ -83,8 +86,9 @@ as.numeric(pull(s2_df, vec_factor))
 
 ```
 
+
 * "NAs introduced by coercion" happened because R is trying to convert non-numeric values (characters) to a numeric data type using the as.numeric function.
 * Other codes worked because they have numeric values. 
-* In summary, whether it makes sense to calculate the mean depends on what your data represents. For "yes" or "no" data, it works. For words, it doesn't make sense. For categories, you can do it, but the result might not mean anything useful in practice.
+* In summary, whether it makes sense to calculate the mean depends on what your data represents. For "yes" or "no" data, it works. For words, it doesn't make sense. For categories, you can do it, but the result might not mean anything useful.
 
 
