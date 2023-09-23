@@ -41,7 +41,6 @@ ggsave("Shinaplot.pdf",plot = last_plot())
 ```
 
 
-
 # Section 2
 
 * Data frame comprised of: 
@@ -57,37 +56,5 @@ s2_df = tibble(
   vec_factor = factor(c("red", "green", "blue","red", "green", "blue", "red","green","blue", "red"))
 )
 ```
-
-
-
-```{r s2_df_mean}
-
-library(tidyverse)
-mean_samp = pull(s2_df, samp)
-mean_vec_logical = pull(s2_df, vec_logical)
-mean_vec_char = pull(s2_df, vec_char)
-mean_vec_factor = pull(s2_df, vec_factor)
-
-```
-
-* Calculating the mean of the numeric vector (mean_numeric) works fine because it contains numeric values.
-* Calculating the mean of the logical vector (mean_logical) also works, as R can treat TRUE as 1 and FALSE as 0, so it calculates the mean correctly.
-* However, attempting to calculate the mean of the character vector (mean_character) and the factor vector (mean_factor) results in an error because you cannot calculate the mean of non-numeric or factor variables directly.
-
-
-```{r s2_df_apply}
-
-as.numeric(pull(s2_df, samp))
-as.numeric(pull(s2_df, vec_logical))
-as.numeric(pull(s2_df, vec_char))
-as.numeric(pull(s2_df, vec_factor))
-
-```
-
-* "NAs introduced by coercion" happened because R is trying to convert non-numeric values (characters) to a numeric data type using the as.numeric function.
-* Other codes worked because they have numeric values. 
-
-
-
 
 
