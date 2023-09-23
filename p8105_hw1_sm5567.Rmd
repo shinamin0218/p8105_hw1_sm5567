@@ -85,5 +85,6 @@ as.numeric(pull(s2_df, vec_factor))
 
 * "NAs introduced by coercion" happened because R is trying to convert non-numeric values (characters) to a numeric data type using the as.numeric function.
 * Other codes worked because they have numeric values. 
+* In summary, whether it makes sense to calculate the mean depends on what your data represents. For "yes" or "no" data, it works. For words, it doesn't make sense. For categories, you can do it, but the result might not mean anything useful in practice.
 
 
